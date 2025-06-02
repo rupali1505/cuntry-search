@@ -23,10 +23,11 @@ const CountryCard = ({ name, flag }) => {
 };
 
 export default function Countries() {
-  const url = "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
+  const url =
+    "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
 
   const [data, setData] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function Countries() {
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
- const handleInput = (value) => {
+  const handleInput = (value) => {
     setSearchValue(value);
     if (value.trim() === "") {
       setSearchData(data);
@@ -51,34 +52,41 @@ export default function Countries() {
     }
   };
 
- 
-
   return (
-    <div style={{
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'center',
-        alignItems:'center'
-    }}>
-        <div>
-          <input type="text" style={{width:'50vw', height:'25px', marginBottom:'20px', marginTop:'10px'}}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div>
+        <input
+          type="text"
+          style={{
+            width: "50vw",
+            height: "25px",
+            marginBottom: "20px",
+            marginTop: "10px",
+          }}
           placeholder="search for countries"
-          onChange={(e)=>handleInput(e.target.value)}
-          />
-        </div>
+          onChange={(e) => handleInput(e.target.value)}
+        />
+      </div>
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           gap: "20px",
-          margin: "10px",
+          width: "90vw",
+          justifyItems: "center",
+          justifyContent:"center"
         }}
       >
-        {searchData.map(({  png , common}, idx) => (
+        {searchData.map(({ png, common }, idx) => (
           <CountryCard key={idx} name={common} flag={png} />
         ))}
-       
-        
       </div>
     </div>
   );
