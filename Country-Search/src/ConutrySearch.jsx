@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 const CountryCard = ({ name, flag }) => {
   return (
     <div
+    className="countryCard"
       style={{
+        
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -29,8 +31,9 @@ export default function Countries() {
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchData, setSearchData] = useState([]);
-
   const cardsCount = searchData.length;
+
+  
 
   useEffect(() => {
     fetch(url)
@@ -89,8 +92,8 @@ export default function Countries() {
           margin: "0 auto",
         }}
       >
-        {searchData.map(({ png, common }, idx) => (
-          <CountryCard key={idx} name={common} flag={png} />
+        {searchData.map(({ png, common }) => (
+          <CountryCard key={common} name={common} flag={png} />
         ))}
       </div>
     </div>
