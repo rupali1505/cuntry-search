@@ -30,6 +30,8 @@ export default function Countries() {
   const [searchValue, setSearchValue] = useState("");
   const [searchData, setSearchData] = useState([]);
 
+  const cardsCount = searchData.length;
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -77,11 +79,14 @@ export default function Countries() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gap: "20px",
+          gridTemplateColumns: `repeat(${
+            cardsCount >= 6 ? 6 : cardsCount
+          }, 200px)`,
+          gap: "10px",
           width: "90vw",
           justifyItems: "center",
-          justifyContent:"center"
+          justifyContent: cardsCount >= 6 ? "stretch" : "center",
+          margin: "0 auto",
         }}
       >
         {searchData.map(({ png, common }, idx) => (
